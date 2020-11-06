@@ -18,16 +18,20 @@
 	  else if(i < 1000) countID = '0' + i;
 	  result += 'file ' + rootDir + '/' + countID + 'ts\r\n';
 	}
-	createAndDownloadFile("cidy0106.cd_qvmerger", result);
+	download("cidy0106.cd_qvmerger", result);
   }
-  function createAndDownloadFile(fileName, content) {
-    var aTag = document.createElement('a');
-    var blob = new Blob([content]);
-    aTag.download = fileName;
-    aTag.href = URL.createObjectURL(blob);
-    aTag.click();
-    URL.revokeObjectURL(blob);
-  }
+  function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+ 
+  element.style.display = 'none';
+  document.body.appendChild(element);
+ 
+  element.click();
+ 
+  document.body.removeChild(element);
+}
 </script>
 </head>
 <body>

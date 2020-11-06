@@ -18,20 +18,17 @@
 	  else if(i < 1000) countID = '0' + i;
 	  result += 'file ' + rootDir + '/' + countID + 'ts\r\n';
 	}
-	download("cidy0106.cd_qvmerger", result);
+	document.getElementById("resultField").value = result;
+	//createAndDownloadFile("cidy0106.cd_qvmerger", result);
   }
-  function download(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
- 
-  element.style.display = 'none';
-  document.body.appendChild(element);
- 
-  element.click();
- 
-  document.body.removeChild(element);
-}
+  function createAndDownloadFile(fileName, content) {
+    var aTag = document.createElement('a');
+    var blob = new Blob([content]);
+    aTag.download = fileName;
+    aTag.href = URL.createObjectURL(blob);
+    aTag.click();
+    URL.revokeObjectURL(blob);
+  }
 </script>
 </head>
 <body>
@@ -39,6 +36,9 @@
   Path：<input id="rootPath" type="text" value="(Remove The Last Slash)"/><br />
   Nums：<input id="endNum" type="text" value="110"/><br />
   <button type="button" onclick='generateList();'>Generate A List!</button>
+  <br />
+  Result：<br />
+  <textarea id="resultField" cols="10" rows="5" style="width: 200px; height: 100px;"></textarea>
 </div>
 </body>
 </html>

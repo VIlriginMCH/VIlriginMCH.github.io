@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="charset" content="utf-8">
+<meta name="websiteSponsor" content="GitHub Pages">
+<meta name="websiteDeveloper" content="MaChuanhao_Vilrigin">
+<title>Generate A List Now! - MCH_VIL</title>
+<script type="text/javascript">
+  function generateList(){
+  var endIndex = parseInt(document.getElementById("endNum").value);
+  var rootDir = document.getElementById("rootPath").value;
+	if(endIndex < 1)
+	  return;
+	var result = '#Generate_By_MaChuanhao_Vilrigin\r\n\r\n';
+	var countID = 0;
+    for(var i = 0;i < (endIndex + 1);i++){
+	  if(i < 10) countID = '000' + i;
+	  else if(i < 100) countID = '00' + i;
+	  else if(i < 1000) countID = '0' + i;
+	  result += 'file ' + rootDir + '/' + countID + 'ts\r\n';
+	}
+	createAndDownloadFile("cidy0106.cd_qvmerger", result);
+  }
+  function createAndDownloadFile(fileName, content) {
+    var aTag = document.createElement('a');
+    var blob = new Blob([content]);
+    aTag.download = fileName;
+    aTag.href = URL.createObjectURL(blob);
+    aTag.click();
+    URL.revokeObjectURL(blob);
+  }
+
+</script>
+</head>
+<body>
+<div align="center">
+  Path：<input id="rootPath" type="text" value="(Remove The Last Slash)"/><br />
+  Nums：<input id="endNum" type="text" value="110"/><br />
+  <button type="button" onclick='generateList();'>Generate A List!</button>
+</div>
+</body>
+</html>
